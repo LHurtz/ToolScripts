@@ -27,6 +27,23 @@ function CopyFile
     }
 }
 
+$counter = 0;
+$loggingIncrement = 20;
+
+function LogProgress
+{
+    $script:counter++
+
+    if ($script:counter % $loggingIncrement -eq 0)
+    {
+        Write-Host "$script:counter of $fileCount files copied"
+
+        $percentage = [int]($script:counter / $fileCount * 100)
+
+        Write-Host "Progress: $percentage%"
+    }
+}
+
 $files = Get-ChildItem -Path $sourcePath -Include *.jpg, *.png -File -Recurse
 $fileCount = $files.Count
 
@@ -34,4 +51,5 @@ Write-Host "$fileCount Files to copy"
 
 foreach ($file in $files) {
     CopyFile -file $file
+    LogProgress
 }
