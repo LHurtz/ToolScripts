@@ -28,7 +28,7 @@ function CopyFile
 }
 
 $counter = 0;
-$loggingIncrement = 20;
+$loggingIncrement = 100;
 
 function LogProgress
 {
@@ -36,11 +36,9 @@ function LogProgress
 
     if ($script:counter % $loggingIncrement -eq 0)
     {
-        Write-Host "$script:counter of $fileCount files copied"
-
         $percentage = [int]($script:counter / $fileCount * 100)
 
-        Write-Host "Progress: $percentage%"
+        Write-Progress -Activity "Kopiere Dateien" -Status "$script:counter of $fileCount files copied" -PercentComplete $percentage
     }
 }
 
