@@ -42,7 +42,7 @@ function LogProgress
     }
 }
 
-$files = Get-ChildItem -Path $sourcePath -Include *.jpg, *.png -File -Recurse
+$files = Get-ChildItem -Path $sourcePath -Include *.jpg, *.jpeg, *.png -File -Recurse
 $fileCount = $files.Count
 
 Write-Host "$fileCount Files to copy"
